@@ -1,44 +1,58 @@
 "use client";
-import { IPaginatedList } from "../interfaces/PaginatedList";
 import { ApiEndpoints } from "./ApiEndpoints";
+import { IPaginatedList } from "../interfaces/PaginatedList";
 
-export async function useGetQuery<T, P>(
-  endpointKey: ApiEndpoints, // Change the type to accept the keys of the enum
-  params?: P
+export async function useGetQuery<T, P = Record<string, unknown>>(
+  endpointKey: ApiEndpoints,
+  params?: P,
+  token?: string // Optional token parameter for authenticated requests
 ): Promise<T> {
   const queryString = new URLSearchParams(params as any).toString();
   const endpointUrl = endpointKey;
+  const headers: HeadersInit = {
+    "Content-Type": "application/json",
+  };
+  if (token) {
+    headers["Authorization"] = `Bearer ${token}`;
+  }
   const response = await fetch(`${endpointUrl}?${queryString}`, {
     method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      // Include authorization header if needed
-    },
+    headers,
   });
 
   if (!response.ok) {
-    throw new Error(`HTTP error! Status: ${response.status}`);
+    const errorText = await response.text();
+    throw new Error(
+      `HTTP error! Status: ${response.status}, Body: ${errorText}`
+    );
   }
 
   return response.json();
 }
 
-export async function useGetListQuery<T, P>(
-  endpointKey: ApiEndpoints, // Correct type declaration
-  params: P
+export async function useGetListQuery<T, P = Record<string, unknown>>(
+  endpointKey: ApiEndpoints,
+  params: P,
+  token?: string // Optional token parameter for authenticated requests
 ): Promise<IPaginatedList<T>> {
   const queryString = new URLSearchParams(params as any).toString();
-  const endpointUrl = endpointKey; // Access enum value directly
+  const endpointUrl = endpointKey;
+  const headers: HeadersInit = {
+    "Content-Type": "application/json",
+  };
+  if (token) {
+    headers["Authorization"] = `Bearer ${token}`;
+  }
   const response = await fetch(`${endpointUrl}?${queryString}`, {
     method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      // Include authorization header if needed
-    },
+    headers,
   });
 
   if (!response.ok) {
-    throw new Error(`HTTP error! Status: ${response.status}`);
+    const errorText = await response.text();
+    throw new Error(
+      `HTTP error! Status: ${response.status}, Body: ${errorText}`
+    );
   }
 
   return response.json();

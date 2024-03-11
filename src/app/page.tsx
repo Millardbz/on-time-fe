@@ -6,20 +6,12 @@ export default function Home() {
   const { data, loading, error } = useGetTodoListQuery({
     listId: 1,
     pageNumber: 1,
-    pageSize: 10,
+    pageSize: 1,
   });
 
   const { data: todoLists } = useGetTodoListsQuery();
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>Error: {error.message}</div>;
-  }
-
-  console.log("aAAAA", todoLists);
+  console.log("aAAAA", error);
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
@@ -34,7 +26,7 @@ export default function Home() {
         {todoLists && (
           <div>
             {todoLists.lists.map((list) => (
-              <div key={list.id}>{list.title}</div>
+              <div key={list.id}>{list.colour}</div>
             ))}
           </div>
         )}
