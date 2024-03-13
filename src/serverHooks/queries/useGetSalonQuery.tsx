@@ -4,9 +4,7 @@ import { useGenericQuery } from "../api/useGenericQuery";
 import { ISalon } from "../dtos/ISalon";
 import { Guid } from "../types/Guid";
 
-export interface GetSalonQueryParams {
-  id: Guid;
-}
+export interface GetSalonQueryParams {}
 
 export const useGetSalonQuery = (params: GetSalonQueryParams) => {
   return useGenericQuery<ISalon, GetSalonQueryParams>(

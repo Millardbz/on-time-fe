@@ -6,10 +6,10 @@ import { useGetSalonQuery } from "@/serverHooks/queries/useGetSalonQuery";
 import { newGuid } from "@/serverHooks/types/newGuid";
 
 export default function Home() {
-  const { data: salonList, produceFetch: aaa } = useGetSalonListQuery({
-    pageNumber: 1,
-    pageSize: 20,
-  });
+  // const { data: salonList, produceFetch: aaa } = useGetSalonListQuery({
+  //   pageNumber: 1,
+  //   pageSize: 20,
+  // });
 
   // const { run, error, success, setCommand, produceCommand, command } =
   //   useCreateSalonCommand({
@@ -53,10 +53,9 @@ export default function Home() {
               //   draft.Id = newGuid();
               //   draft.Name = "Fixed";
               // });
-
-              produceFetch((draft) => {
-                draft.id = "7c05d9c9-4b6d-4a47-a4f8-8043fb6099fc";
-              });
+              // produceFetch((draft) => {
+              //   draft.id = "7c05d9c9-4b6d-4a47-a4f8-8043fb6099fc";
+              // });
             }}
           >
             Create Salon

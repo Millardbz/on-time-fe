@@ -40,8 +40,6 @@ export function useGenericCommand<DTO>({
       }
 
       try {
-        console.log("Command DTO", commandDto);
-
         const response = await fetch(endpoint, {
           method: "POST",
           headers: {

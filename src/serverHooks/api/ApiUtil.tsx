@@ -16,7 +16,6 @@ export async function useGetQuery<T, P = Record<string, unknown>>(
   if (token) {
     headers["Authorization"] = `Bearer ${token}`;
   }
-  console.log("queryString", `${queryString}`);
 
   const response = await fetch(`${endpointUrl}${queryString}`, {
     method: "GET",
@@ -24,10 +23,14 @@ export async function useGetQuery<T, P = Record<string, unknown>>(
   });
 
   if (!response.ok) {
-    const errorText = await response.text();
-    throw new Error(
-      `HTTP error! Status: ${response.status}, Body: ${errorText}`
-    );
+    let errorResponse;
+    try {
+      const textResponse = await response.text(); // Get the response as text
+      errorResponse = JSON.parse(textResponse); // Parse the response as JSON
+    } catch (error) {
+      throw new Error("The server returned an invalid JSON response.");
+    }
+    throw errorResponse;
   }
 
   return response.json();
@@ -52,12 +55,15 @@ export async function useGetListQuery<T, P = Record<string, unknown>>(
   });
 
   if (!response.ok) {
-    const errorText = await response.text();
-    throw new Error(
-      `HTTP error! Status: ${response.status}, Body: ${errorText}`
-    );
+    let errorResponse;
+    try {
+      const textResponse = await response.text(); // Get the response as text
+      errorResponse = JSON.parse(textResponse); // Parse the response as JSON
+    } catch (error) {
+      throw new Error("The server returned an invalid JSON response.");
+    }
+    throw errorResponse;
   }
-
   return response.json();
 }
 
@@ -66,8 +72,6 @@ export async function useCommand<T>(
   method: "POST" | "PUT" | "DELETE",
   body: T
 ): Promise<void> {
-  // Use your actual fetch/api call logic here
-  console.log(`Executing ${method} request to ${endpoint} with body:`, body);
   // Mock response
   return new Promise((resolve, reject) => {
     setTimeout(() => {

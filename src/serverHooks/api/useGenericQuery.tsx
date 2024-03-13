@@ -11,7 +11,7 @@ export function useGenericQuery<T, P extends object>(
   const [params, setParams] = useState<P>(initialParams);
   const [data, setData] = useState<T | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<any | null>(null); // Change error state to any
 
   // Function to mutate query parameters using Immer and immediately fetch data
   const fetch = useCallback(
@@ -23,8 +23,9 @@ export function useGenericQuery<T, P extends object>(
         setLoading(true);
         useGetQuery<T, P>(endpoint, params) // Adjusted to use P
           .then(setData)
-          .catch((err: Error) => {
-            // Handle error
+          .catch((err: any) => {
+            // Change err to any
+            setError(err); // Set error state to err
           })
           .finally(() => setLoading(false));
       }
@@ -48,7 +49,7 @@ export function useGenericQuery<T, P extends object>(
 interface QueryResult<T, P> {
   data: T | null;
   loading: boolean;
-  error: string | null;
+  error: any | null; // Change error type to any
   produceFetch: (recipe: (draft: P) => void) => void; // Adjusted to use P
   fetch: (recipe?: (draft: P) => void) => void; // Adjusted to use P
 }
