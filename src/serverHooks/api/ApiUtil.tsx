@@ -7,7 +7,8 @@ export async function useGetQuery<T, P = Record<string, unknown>>(
   params?: P,
   token?: string // Optional token parameter for authenticated requests
 ): Promise<T> {
-  const queryString = new URLSearchParams(params as any).toString();
+  // Only use the values of the parameters
+  const queryString = params ? Object.values(params).join("/") : "";
   const endpointUrl = endpointKey;
   const headers: HeadersInit = {
     "Content-Type": "application/json",
@@ -15,7 +16,9 @@ export async function useGetQuery<T, P = Record<string, unknown>>(
   if (token) {
     headers["Authorization"] = `Bearer ${token}`;
   }
-  const response = await fetch(`${endpointUrl}?${queryString}`, {
+  console.log("queryString", `${queryString}`);
+
+  const response = await fetch(`${endpointUrl}${queryString}`, {
     method: "GET",
     headers,
   });
@@ -56,4 +59,22 @@ export async function useGetListQuery<T, P = Record<string, unknown>>(
   }
 
   return response.json();
+}
+
+export async function useCommand<T>(
+  endpoint: string,
+  method: "POST" | "PUT" | "DELETE",
+  body: T
+): Promise<void> {
+  // Use your actual fetch/api call logic here
+  console.log(`Executing ${method} request to ${endpoint} with body:`, body);
+  // Mock response
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      // simulate a successful request
+      resolve();
+      // or simulate an error
+      // reject(new Error("Simulated fetch error"));
+    }, 1000);
+  });
 }
