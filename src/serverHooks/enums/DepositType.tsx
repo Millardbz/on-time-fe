@@ -1,5 +1,5 @@
 export enum DepositType {
-  Fixed,
-  Percentage,
-  None,
+  Fixed = "Fixed",
+  Percentage = "Percentage",
+  None = "None",
 }

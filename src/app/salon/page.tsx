@@ -1,17 +1,17 @@
 "use client";
-import { HeaderSection } from "@/components/salon/HeaderSection";
-import { ServiceContentSection } from "@/components/salon/ServiceContentSection";
-import { Stepper } from "@/components/salon/Stepper";
+import { HeaderSection } from "@/components/customer/HeaderSection";
+import { ServiceContentSection } from "@/components/customer/ServiceContentSection";
+import { Stepper } from "@/components/customer/Stepper";
 import serviceData from "../../../public/serviceData.json";
 import userData from "../../../public/userData.json";
 import {
   StepperProvider,
   useStepperContext,
 } from "@/providers/StepperProvider";
-import { UserContentSection } from "@/components/salon/UserContentSection";
-import { ConfirmationContentSection } from "@/components/salon/ConfirmationContentSection";
+import { UserContentSection } from "@/components/customer/UserContentSection";
+import { ConfirmationContentSection } from "@/components/customer/ConfirmationContentSection";
 
-const SalonContent = () => {
+const CustomerContent = () => {
   const { command } = useStepperContext();
   return command?.dto.WorkerId ? (
     <ConfirmationContentSection users={userData} />
@@ -22,13 +22,13 @@ const SalonContent = () => {
   );
 };
 
-export default function SalonPage() {
+export default function CustomerPage() {
   return (
     <StepperProvider>
       <div className="py-10 px-5 md:px-0 flex flex-col gap-8">
         <HeaderSection />
         <Stepper />
-        <SalonContent />
+        <CustomerContent />
       </div>
     </StepperProvider>
   );

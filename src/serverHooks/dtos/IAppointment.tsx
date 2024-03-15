@@ -2,7 +2,7 @@ export interface IAppointment {
   CustomerName: string;
   CustomerEmail: string;
   CustomerPhone: string;
-  SalonId: number;
+  CustomerId: number;
   ServiceId: number;
   WorkerId: number;
   Duration: number;

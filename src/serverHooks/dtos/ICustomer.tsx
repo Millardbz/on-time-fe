@@ -1,6 +1,6 @@
 import { DepositType } from "../enums/DepositType";
 
-export interface ISalon {
+export interface ICustomer {
   id: string; // Using string type for GUID
   ownerId: string;
   name: string;

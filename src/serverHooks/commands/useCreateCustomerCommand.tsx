@@ -4,7 +4,7 @@ import { useGenericCommand } from "../api/useGenericCommand";
 import { Guid } from "../types/Guid";
 import { DepositType } from "../enums/DepositType";
 
-export interface IUseCreateSalonCommand {
+export interface IUseCreateCustomerCommand {
   Id: Guid;
   OwnerId: Guid;
   Name: string;
@@ -18,13 +18,13 @@ export interface IUseCreateSalonCommand {
   DepositType: DepositType;
 }
 
-export const useCreateSalonCommand = ({
+export const useCreateCustomerCommand = ({
   initialCommand,
 }: {
-  initialCommand?: { dto: IUseCreateSalonCommand };
+  initialCommand?: { dto: IUseCreateCustomerCommand };
 }) => {
-  return useGenericCommand<IUseCreateSalonCommand>({
-    endpoint: ApiEndpoints.SalonList,
+  return useGenericCommand<IUseCreateCustomerCommand>({
+    endpoint: ApiEndpoints.CustomerList,
     initialCommand,
   });
 };
