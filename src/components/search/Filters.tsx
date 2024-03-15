@@ -343,9 +343,38 @@ export const Filters: FC = () => {
                   </Disclosure>
                 ))}
               </form>
-
               {/* Product grid */}
-              <div className="lg:col-span-3">{/* Your content */}</div>
+              <ol>
+                <li>1</li>
+                <li>1</li>
+                <li>1</li>
+                <li>1</li>
+                <li>1</li>
+                <li>1</li>
+                <li>1</li>
+                <li>1</li>
+                <li>1</li>
+                <li>1</li>
+                <li>1</li>
+                <li>1</li>
+                <li>1</li>
+                <li>1</li>
+                <li>1</li>
+                <li>1</li>
+                <li>1</li>
+                <li>1</li>
+                <li>1</li>
+                <li>1</li>
+                <li>1</li>
+                <li>1</li>
+                <li>1</li>
+                <li>1</li>
+                <li>1</li>
+                <li>1</li>
+                <li>1</li>
+                <li>1</li>
+              </ol>
+              <div className="lg:col-span-3"></div>
             </div>
           </section>
         </main>
